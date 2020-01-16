@@ -18,23 +18,23 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get(__dirname + "/", (req, res) => {
+app.get("/", (req, res) => {
   res.render("home", { content: homeStartingContent, posts : posts });
 });
 
-app.get(__dirname +"/about", (req, res) => {
+app.get("/about", (req, res) => {
   res.render("about", { aboutContent: aboutContent });
 });
 
-app.get(__dirname + "/contact", (req, res) => {
+app.get("/contact", (req, res) => {
   res.render("contact", { contactContent: contactContent });
 });
 
-app.get(__dirname + "/compose", (req, res) => {
+app.get("/compose", (req, res) => {
   res.render("compose");
 });
 
-app.post(__dirname + "/compose", (req, res) => {
+app.post("/compose", (req, res) => {
   const post = {
     title:  req.body.titleText,
     body:  req.body.postBody
@@ -45,7 +45,7 @@ app.post(__dirname + "/compose", (req, res) => {
   res.redirect("/");
 });
 
-app.get(__dirname + "/posts/:postName", (req, res) => {
+app.get("/posts/:postName", (req, res) => {
   let compare = _.lowerCase(req.params.postName);
 
    posts.forEach((post) => {
