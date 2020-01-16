@@ -18,23 +18,23 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
+app.get(__dirname + "/", (req, res) => {
   res.render("home", { content: homeStartingContent, posts : posts });
 });
 
-app.get("/about", (req, res) => {
+app.get(__dirname +"/about", (req, res) => {
   res.render("about", { aboutContent: aboutContent });
 });
 
-app.get("/contact", (req, res) => {
+app.get(__dirname + "/contact", (req, res) => {
   res.render("contact", { contactContent: contactContent });
 });
 
-app.get("/compose", (req, res) => {
+app.get(__dirname + "/compose", (req, res) => {
   res.render("compose");
 });
 
-app.post("/compose", (req, res) => {
+app.post(__dirname + "/compose", (req, res) => {
   const post = {
     title:  req.body.titleText,
     body:  req.body.postBody
@@ -45,7 +45,7 @@ app.post("/compose", (req, res) => {
   res.redirect("/");
 });
 
-app.get("/posts/:postName", (req, res) => {
+app.get(__dirname + "/posts/:postName", (req, res) => {
   let compare = _.lowerCase(req.params.postName);
 
    posts.forEach((post) => {
@@ -59,6 +59,6 @@ app.get("/posts/:postName", (req, res) => {
 
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
 });
